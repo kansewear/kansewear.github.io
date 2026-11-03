@@ -1,0 +1,406 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Сто номеров</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Manrope:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: burgundy-lit hero with wax seal, sticky filter bar, 10x10 hangtag grid (punched hole, clipped corners), claim panel styled as a perforated tag. Dark-first. */
+:root {
+  --bg: #0e0709;
+  --glow: rgba(163, 34, 59, .34);
+  --surface: #1a0f12;
+  --surface-2: #231418;
+  --line: #3c2a2e;
+  --fg: #f4ece6;
+  --muted: #a8979a;
+  --accent: #b02a45;
+  --accent-hi: #d2445f;
+  --accent-lo: #6e1226;
+  --accent-ink: #fff6f2;
+  --gold: #e0b46c;
+  --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --grain-opacity: .05;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f3e9e2; --glow: rgba(176, 42, 69, .16); --surface: #fffaf6; --surface-2: #f8ede6; --line: #dccbc3;
+    --fg: #26161a; --muted: #75646a; --accent: #9a2039; --accent-hi: #b83450; --accent-lo: #64102a; --accent-ink: #fff6f2; --gold: #9a6410;
+    --grain-opacity: .07; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f3e9e2; --glow: rgba(176, 42, 69, .16); --surface: #fffaf6; --surface-2: #f8ede6; --line: #dccbc3;
+  --fg: #26161a; --muted: #75646a; --accent: #9a2039; --accent-hi: #b83450; --accent-lo: #64102a; --accent-ink: #fff6f2; --gold: #9a6410;
+  --grain-opacity: .07; color-scheme: light;
+}
+* { box-sizing: border-box; }
+:root { overflow-x: clip; }
+body {
+  position: relative; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px; overflow-x: clip;
+}
+body::after { content: ""; position: fixed; inset: 0; background-image: var(--grain); opacity: var(--grain-opacity); pointer-events: none; z-index: 0; }
+.wrap { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+/* hero */
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 28px 0 8px; }
+.ghost { position: absolute; right: 0; top: -24px; font-family: var(--font-display); font-weight: 900; font-size: clamp(180px, 42vw, 360px); line-height: .8; color: transparent; -webkit-text-stroke: 1px var(--line); letter-spacing: -.02em; z-index: -1; user-select: none; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin: 0; display: flex; gap: 10px; align-items: center; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--gold); }
+h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(64px, 16vw, 128px); line-height: .86; margin: 12px 0 16px; letter-spacing: .005em; text-transform: uppercase; text-wrap: balance; }
+h1 em { font-style: normal; background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lead { max-width: 52ch; color: var(--muted); margin: 0; font-size: 16px; }
+.seal {
+  width: clamp(84px, 18vw, 132px); aspect-ratio: 1; display: grid; place-items: center; color: var(--accent-ink);
+  font-family: var(--font-display); font-weight: 900; font-size: clamp(44px, 9vw, 68px);
+  border-radius: 52% 48% 55% 45% / 47% 56% 44% 53%;
+  background: radial-gradient(circle at 32% 28%, var(--accent-hi), var(--accent) 45%, var(--accent-lo) 100%);
+  box-shadow: inset 0 3px 6px rgba(255,255,255,.28), inset 0 -8px 14px rgba(0,0,0,.35);
+  transform: rotate(-9deg); position: relative; text-shadow: 0 2px 3px rgba(0,0,0,.4);
+}
+.seal::before { content: ""; position: absolute; inset: 12%; border-radius: 50%; border: 2px solid rgba(255,246,242,.35); box-shadow: inset 0 2px 4px rgba(0,0,0,.35); }
+@media (max-width: 520px) { .hero { grid-template-columns: minmax(0, 1fr); } .seal { position: absolute; right: 4px; top: 6px; width: 72px; font-size: 38px; } h1 { margin-top: 56px; } }
+
+/* counter */
+.count { display: flex; flex-direction: column; gap: 12px; padding: 20px; background: linear-gradient(160deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); }
+.count-row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; justify-content: space-between; }
+.count-num { font-family: var(--font-display); font-weight: 900; font-size: 76px; line-height: .9; font-variant-numeric: tabular-nums; }
+.count-num small { font-size: 36px; color: var(--muted); font-weight: 700; }
+.count-label { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.ticks { display: grid; grid-template-columns: repeat(100, 1fr); gap: 2px; }
+.tick { height: 14px; background: var(--line); transform-origin: bottom; }
+.tick.res { background: transparent; box-shadow: inset 0 0 0 1px var(--gold); }
+.tick.on { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); }
+.goal { margin: 0; font-size: 14px; color: var(--muted); padding-top: 10px; border-top: 1px dashed var(--line); }
+.goal b { color: var(--fg); font-variant-numeric: tabular-nums; }
+.tick:nth-child(50) { margin-right: 3px; }
+.tick-scale { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+/* sticky bar */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 20; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 0; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.seg { display: inline-flex; border: 1px solid var(--line); background: var(--surface); }
+.seg button { font: inherit; font-size: 13px; font-weight: 500; background: transparent; color: var(--muted); border: 0; padding: 9px 14px; cursor: pointer; transition: background .15s, color .15s; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: linear-gradient(180deg, var(--accent-hi), var(--accent)); color: var(--accent-ink); }
+.search { flex: 1 1 160px; min-width: 0; font: inherit; font-size: 14px; background: var(--surface); color: var(--fg); border: 1px solid var(--line); padding: 9px 12px; }
+.search::placeholder { color: var(--muted); }
+button:focus-visible, .search:focus-visible, .cell:focus-visible, .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* hangtag grid */
+.grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 9px; } }
+.cell {
+  --cut: 11px;
+  position: relative; display: block; min-width: 0; padding: 0; border: 0; background: none; font: inherit; color: var(--fg); cursor: pointer; text-align: left;
+  aspect-ratio: 1 / 1.28; transition: transform .18s ease, filter .18s ease;
+  animation: rise .5s ease both; animation-delay: calc(var(--i, 0) * 7ms);
+}
+.tag, .in { position: absolute; clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%, 0 var(--cut)); }
+.tag { inset: 0; background: var(--line); }
+.in { inset: 1px; background: linear-gradient(170deg, var(--surface-2), var(--surface)); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 3px; padding: 0 5px 8px; }
+.in::before { content: ""; position: absolute; top: 9px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 1px 2px rgba(0,0,0,.5), 0 0 0 1px var(--line); }
+.in::after { content: ""; position: absolute; top: 0; left: 50%; width: 1px; height: 13px; background: var(--muted); opacity: .45; }
+.n { font-family: var(--font-display); font-weight: 900; font-size: clamp(30px, 8.6vw, 40px); line-height: .9; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+.who { width: 100%; text-align: center; font-size: 10.5px; line-height: 1.2; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-height: 13px; font-weight: 500; }
+.cell:hover, .cell:focus-visible { transform: translateY(-3px) rotate(-1.2deg);  }
+.cell:hover .tag { background: var(--fg); }
+.cell.reserved .tag { background: repeating-linear-gradient(90deg, var(--gold) 0 5px, transparent 5px 9px); background-color: transparent; }
+.cell.reserved .in { background: var(--surface); }
+.cell.reserved .n { color: var(--gold); }
+.cell.reserved .who { color: var(--gold); }
+.cell.paid .tag { background: linear-gradient(160deg, var(--accent-hi), var(--accent-lo)); }
+.cell.paid .in { background: linear-gradient(160deg, var(--accent-hi) -10%, var(--accent) 45%, var(--accent-lo) 120%); color: var(--accent-ink); }
+.cell.paid .in::before { background: var(--accent-lo); box-shadow: inset 0 1px 2px rgba(0,0,0,.6), 0 0 0 1px rgba(255,246,242,.4); }
+.cell.paid .in::after { background: var(--accent-ink); opacity: .6; }
+.cell.paid .n { text-shadow: 0 1px 0 rgba(255,255,255,.25), 0 -1px 0 rgba(0,0,0,.3); }
+.cell.paid .who { color: var(--accent-ink); opacity: .9; }
+.cell.dim { opacity: .2; }
+.cell.sel { transform: translateY(-3px); filter: drop-shadow(0 0 0 transparent); }
+.cell.sel .tag { background: var(--gold); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 14px; height: 18px; border: 1px solid var(--line); background: var(--surface); clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 3px, 100% 100%, 0 100%, 0 3px); }
+.sw.r { border: 1px dashed var(--gold); }
+.sw.p { background: linear-gradient(160deg, var(--accent-hi), var(--accent-lo)); border-color: var(--accent); }
+
+/* claim panel */
+.panel { display: grid; grid-template-columns: auto minmax(0, 1fr); background: linear-gradient(160deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); position: relative; }
+.stub { padding: 20px 22px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; border-right: 2px dashed var(--line); position: relative; min-width: 120px; }
+.stub::before, .stub::after { content: ""; position: absolute; right: -9px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line); }
+.stub::before { top: -9px; } .stub::after { bottom: -9px; }
+.panel-num { font-family: var(--font-display); font-weight: 900; font-size: 84px; line-height: .85; font-variant-numeric: tabular-nums; background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.panel-of { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.body { padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; justify-content: center; min-width: 0; }
+.body p { margin: 0; }
+.msg { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+.msg code { flex: 1 1 100%; min-width: 0; font-family: var(--font-mono); font-size: 14px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); overflow-wrap: anywhere; user-select: all; }
+.btn { font: inherit; font-weight: 700; font-size: 14px; background: linear-gradient(180deg, var(--accent-hi), var(--accent)); color: var(--accent-ink); border: 0; padding: 10px 18px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: transform .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); box-shadow: none; }
+@media (max-width: 520px) { .panel { grid-template-columns: minmax(0, 1fr); } .stub { border-right: 0; border-bottom: 2px dashed var(--line); flex-direction: row; gap: 12px; justify-content: flex-start; } .stub::before, .stub::after { right: auto; top: auto; bottom: -9px; } .stub::before { left: -9px; } .stub::after { right: -9px; left: auto; } .panel-num { font-size: 64px; } }
+
+.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; border-top: 1px solid var(--line); padding-top: 24px; }
+.how div { min-width: 0; }
+.how b { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+.how p { margin: 0; color: var(--muted); font-size: 14px; }
+.note { font-size: 12px; color: var(--muted); margin: 0; }
+.empty { grid-column: 1 / -1; color: var(--muted); padding: 24px 0; }
+@media (prefers-reduced-motion: reduce) { .cell { animation: none; transition: none; } .cell:hover, .cell.sel { transform: none; } .btn { transition: none; } }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { display: block; height: 60px; width: auto; fill: var(--accent-hi); fill-rule: evenodd; stroke: none; }
+.top-note { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.me { display: flex; gap: 16px; align-items: center; padding: 16px 20px; border: 1px solid var(--line); background: var(--surface); }
+.me p { margin: 0; min-width: 0; font-size: 15px; }
+.me-photo { flex: none; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-weight: 900; font-size: 32px; color: var(--accent-ink); background: linear-gradient(160deg, var(--accent-hi), var(--accent-lo)); overflow: hidden; }
+.me-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.end { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 0 0; border-top: 1px solid var(--line); }
+.end p { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; text-transform: uppercase; }
+.terms { border-top: 1px solid var(--line); padding-top: 24px; }
+.terms b { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; }
+.terms ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 14px; }
+</style>
+
+<div class="wrap">
+  <div class="top"><svg class="logo" viewBox="245 340 530 372" role="img" aria-label="Kanse" xmlns="http://www.w3.org/2000/svg"><path d="M 376.97 347.47 C 462.63 347.57 548.34 347.53 634.00 347.51 C 638.87 347.51 643.75 347.59 648.62 347.65 C 654.33 353.10 659.37 359.27 664.31 365.42 C 672.97 376.16 679.77 387.88 686.10 400.10 C 687.05 401.88 687.54 403.79 688.06 405.73 C 682.96 405.77 678.11 404.28 673.00 404.48 C 629.33 404.42 585.67 404.51 542.00 404.46 C 536.25 404.48 530.51 404.36 524.77 404.55 C 523.20 411.97 522.99 419.51 523.80 427.04 C 525.27 437.54 530.25 447.77 537.48 455.51 C 543.01 461.79 549.83 465.94 556.65 470.61 C 574.97 483.02 593.81 494.67 611.94 507.44 C 638.40 524.65 664.42 542.53 690.90 559.70 C 684.43 576.60 674.18 592.56 663.19 606.88 C 659.58 604.98 656.56 602.35 653.23 600.03 C 622.20 577.90 591.38 555.59 560.31 533.50 C 544.71 521.98 528.55 511.34 513.17 499.51 C 512.03 499.42 510.89 499.33 509.75 499.25 C 501.34 505.63 492.74 511.73 484.07 517.74 C 442.69 547.27 401.41 576.97 360.02 606.46 C 358.68 606.59 357.89 604.94 357.06 604.09 C 348.52 592.70 340.70 580.41 334.81 567.42 C 333.75 565.10 332.57 562.83 331.32 560.60 C 333.04 558.79 335.03 557.40 337.17 556.12 C 362.90 539.29 388.47 522.19 414.08 505.16 C 434.16 491.11 455.03 478.10 475.18 464.17 C 484.64 456.71 492.50 447.71 496.23 436.05 C 499.30 428.14 498.94 420.31 498.72 411.99 C 498.66 409.42 498.11 406.95 497.41 404.48 C 449.28 404.48 401.13 404.48 353.00 404.51 C 346.57 404.40 340.09 405.42 333.77 406.51 C 334.74 403.29 336.10 400.28 337.70 397.33 C 346.88 379.42 358.84 363.22 372.61 348.60 C 373.79 347.18 375.31 347.65 376.97 347.47 Z M 509.38 404.51 C 509.36 410.27 509.40 415.89 511.03 421.49 C 513.48 416.53 512.51 409.90 512.75 404.46 L 509.38 404.51 Z"/><path d="M 506.44 541.52 C 511.57 540.95 517.33 540.92 522.20 542.84 C 532.74 546.71 540.63 556.75 541.51 567.99 C 542.71 579.20 537.05 590.58 527.35 596.31 C 515.79 603.47 499.79 601.48 490.44 591.56 C 481.22 582.37 479.49 567.13 485.98 555.96 C 490.33 548.59 497.93 542.92 506.44 541.52 Z"/><path d="M 652.09 661.40 C 651.13 663.64 649.55 665.34 647.91 667.08 C 644.24 665.95 640.77 664.26 637.06 663.27 C 630.35 661.68 623.57 660.98 616.77 662.55 C 613.58 663.17 611.65 664.31 609.48 666.68 C 609.47 667.89 609.46 669.11 609.44 670.33 C 613.39 674.65 618.24 674.37 623.61 674.83 C 632.14 675.73 642.55 675.24 650.14 679.85 C 657.04 683.82 657.09 694.43 651.67 699.67 C 646.00 705.47 636.66 706.33 629.00 706.33 C 618.23 706.42 607.90 704.90 599.16 698.14 C 600.66 696.18 602.16 694.22 603.67 692.27 C 613.19 698.21 624.68 700.60 635.78 698.88 C 639.20 698.30 643.08 697.22 645.41 694.47 C 646.92 692.71 646.82 690.05 646.31 687.93 C 645.27 685.88 642.85 684.80 640.75 684.20 C 630.12 681.87 617.32 683.53 607.21 679.53 C 601.90 677.33 599.70 671.62 601.32 666.24 C 602.90 660.20 608.86 657.10 614.50 655.77 C 627.23 653.14 640.78 654.83 652.09 661.40 Z"/><path d="M 253.65 655.74 C 256.27 655.72 258.88 655.70 261.50 655.66 C 261.74 664.15 261.46 672.65 261.66 681.13 C 273.59 673.07 284.84 663.95 296.64 655.67 C 300.42 655.71 304.19 655.72 307.97 655.77 C 299.72 662.20 290.81 667.94 282.92 674.79 C 292.38 684.54 301.08 695.04 310.60 704.73 C 307.35 704.86 302.72 705.94 299.75 704.37 C 291.76 696.14 284.49 687.13 276.21 679.18 C 271.51 683.02 266.52 686.50 261.64 690.09 C 261.57 695.12 261.61 700.14 261.55 705.17 C 258.86 705.24 256.21 705.15 253.54 704.83 C 253.75 688.47 253.55 672.11 253.65 655.74 Z"/><path d="M 388.60 655.71 C 391.83 655.66 395.05 655.73 398.28 655.70 C 407.27 672.05 415.77 688.67 424.56 705.13 C 421.64 705.14 418.71 705.15 415.78 705.15 C 413.82 701.56 411.95 697.94 410.15 694.27 C 398.98 694.19 387.79 694.20 376.61 694.27 C 374.73 697.89 372.81 701.48 371.01 705.14 C 368.06 705.22 365.17 705.09 362.23 704.77 C 369.08 692.36 375.50 679.70 382.23 667.21 C 384.36 663.40 386.07 659.21 388.60 655.71 Z M 380.90 686.60 C 389.25 686.72 397.61 686.71 405.96 686.60 C 403.25 681.45 400.57 676.29 397.84 671.15 C 396.37 668.38 395.20 665.48 393.22 663.08 C 389.10 670.90 384.79 678.66 380.90 686.60 Z"/><path d="M 482.68 655.73 C 485.92 655.73 489.15 655.71 492.38 655.63 C 495.38 658.32 497.99 661.35 500.67 664.34 C 510.64 674.95 520.58 685.60 530.44 696.31 C 530.74 682.79 530.46 669.26 530.59 655.74 C 533.23 655.72 535.88 655.69 538.52 655.65 C 538.78 672.09 538.57 688.55 538.63 705.00 C 535.48 705.10 532.13 705.47 529.03 704.89 C 526.84 703.70 525.23 701.27 523.45 699.54 C 518.34 694.30 513.59 688.75 508.49 683.51 C 502.49 677.34 497.02 670.75 490.78 664.80 C 490.53 678.25 490.78 691.71 490.65 705.17 C 487.97 705.17 485.32 705.07 482.65 704.85 C 482.70 688.47 482.64 672.10 482.68 655.73 Z"/><path d="M 717.53 655.70 C 733.38 655.73 749.33 655.69 765.17 655.71 C 768.28 655.35 767.15 659.28 767.32 661.16 C 767.42 663.39 765.74 663.29 764.02 663.30 C 751.22 663.22 738.41 663.34 725.60 663.22 C 725.51 667.40 725.51 671.58 725.57 675.76 C 735.18 675.73 744.79 675.76 754.41 675.75 C 754.46 678.27 754.48 680.79 754.48 683.31 C 744.83 683.31 735.17 683.25 725.51 683.34 C 725.55 688.11 725.56 692.88 725.49 697.65 C 739.88 697.73 754.30 697.80 768.69 697.61 C 769.08 699.85 769.45 702.01 769.13 704.29 C 768.09 705.54 766.49 705.03 765.01 705.19 C 749.18 704.98 733.32 705.44 717.50 704.95 C 717.55 688.53 717.50 672.12 717.53 655.70 Z"/></svg><span class="top-note">Первая партия</span></div>
+  <header class="hero">
+    <span class="ghost" aria-hidden="true">100</span>
+    <div>
+      <p class="eyebrow">Предзаказ · 5–19 ноября</p>
+      <h1>Сто <em>номеров</em></h1>
+      <p class="lead">Сто вещей, у каждой свой номер. Выбери свой и напиши мне.</p>
+    </div>
+    <div class="seal" aria-hidden="true">№</div>
+  </header>
+
+  <section class="me">
+    <div class="me-photo" id="mePhoto" aria-hidden="true">К</div>
+    <p>Я Кирилл, из Барнаула. Шесть лет торговал чужой одеждой, теперь делаю свою. Карточку к каждой вещи подпишу сам.</p>
+  </section>
+
+  <section class="count" aria-live="polite">
+    <div class="count-row">
+      <div class="count-num"><span id="taken">0</span><small> / 100</small></div>
+      <div class="count-label" id="countLabel"></div>
+    </div>
+    <div class="ticks" id="ticks" aria-hidden="true"></div>
+    <div class="tick-scale" aria-hidden="true"><span>1</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+    <p class="goal" id="goal"></p>
+  </section>
+
+  <section class="bar" aria-label="Фильтр">
+    <div class="seg" role="group" aria-label="Показать">
+      <button type="button" data-f="all" aria-pressed="true">Все</button>
+      <button type="button" data-f="free" aria-pressed="false">Свободные</button>
+      <button type="button" data-f="taken" aria-pressed="false">Занятые</button>
+    </div>
+    <input class="search" id="q" type="search" inputmode="search" placeholder="Номер или имя" aria-label="Найти номер или имя" autocomplete="off">
+  </section>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="legend">
+    <span><i class="sw"></i> Свободен</span>
+    <span><i class="sw r"></i> Бронь, жду оплату</span>
+    <span><i class="sw p"></i> Оплачен</span>
+  </div>
+
+  <section class="panel" id="panel" aria-live="polite"></section>
+
+  <section class="how">
+    <div><b>Выбери</b><p>Нажми на свободный номер. Любой.</p></div>
+    <div><b>Напиши</b><p>Скопируй сообщение и отправь мне в Telegram.</p></div>
+    <div><b>Оплати</b><p>Скажу, как перевести. После оплаты номер твой.</p></div>
+  </section>
+
+  <section class="terms">
+    <b>Условия</b>
+    <ul>
+      <li>Первые 50 по 4000 ₽, предзаказ до 19 ноября или пока не разберут.</li>
+      <li>Следующие 50 по 5000 ₽, условия те же, пока идёт пошив, до 15 декабря.</li>
+      <li>Платишь сейчас, получаешь в январе.</li>
+      <li>Деньги не пропадают. Если к 19 ноября не запущу пошив, верну всё сразу.</li>
+      <li>Номер любой свободный, закрепляется после оплаты. Доставка отдельно, платит покупатель.</li>
+    </ul>
+  </section>
+
+
+  <section class="end">
+    <p>Не уверен, пиши. Отвечу сам.</p>
+    <a class="btn" href="https://t.me/semenov_kkk" target="_blank" rel="noopener">Telegram @semenov_kkk</a>
+  </section>
+
+</div>
+
+<script type="application/json" id="state">
+{"contact":"semenov_kkk","taken":{}}
+</script>
+<script>
+(function () {
+  var STATE = JSON.parse(document.getElementById('state').textContent);
+  var TAKEN = STATE.taken || {};
+  var CONTACT = STATE.contact;
+  var grid = document.getElementById('grid');
+  var panel = document.getElementById('panel');
+  var q = document.getElementById('q');
+  var filter = 'all';
+  var selected = null;
+  var animate = true;
+
+  function status(n) { var t = TAKEN[n]; return t ? t.status : 'free'; }
+  function counts() {
+    var paid = 0, res = 0;
+    for (var k in TAKEN) { if (TAKEN[k].status === 'paid') paid++; else if (TAKEN[k].status === 'reserved') res++; }
+    return { paid: paid, res: res, taken: paid + res };
+  }
+  function renderCount() {
+    var c = counts();
+    document.getElementById('taken').textContent = c.taken;
+    var parts = ['занято ' + c.taken + ', свободно ' + (100 - c.taken)];
+    if (c.res) parts.push('из них в брони ' + c.res);
+    document.getElementById('countLabel').textContent = parts.join(' · ');
+    var g = document.getElementById('goal');
+    g.innerHTML = '';
+    g.appendChild(document.createTextNode('Первые 50 по 4000 ₽. Оплачено '));
+    var gb = document.createElement('b'); gb.textContent = c.paid + ' из 50'; g.appendChild(gb);
+    g.appendChild(document.createTextNode('. Дальше по 5000 ₽. Не запущу пошив к 19 ноября, верну всё сразу.'));
+    var t = document.getElementById('ticks');
+    t.innerHTML = '';
+    for (var i = 1; i <= 100; i++) {
+      var s = status(i), d = document.createElement('i');
+      d.className = 'tick' + (s === 'paid' ? ' on' : s === 'reserved' ? ' res' : '');
+      t.appendChild(d);
+    }
+  }
+  function matches(n) {
+    var s = status(n), t = TAKEN[n];
+    if (filter === 'free' && s !== 'free') return false;
+    if (filter === 'taken' && s === 'free') return false;
+    var v = q.value.trim().toLowerCase();
+    if (v) {
+      var hay = String(n) + ' ' + (t && t.name ? t.name.toLowerCase() : '');
+      if (hay.indexOf(v) === -1) return false;
+    }
+    return true;
+  }
+  function renderGrid() {
+    grid.innerHTML = '';
+    var shown = 0;
+    for (var n = 1; n <= 100; n++) {
+      if (!matches(n)) continue;
+      shown++;
+      var s = status(n), t = TAKEN[n];
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'cell ' + s + (selected === n ? ' sel' : '');
+      b.setAttribute('data-n', n);
+      if (animate) b.style.setProperty('--i', shown);
+      else b.style.animation = 'none';
+      b.setAttribute('aria-label', 'Номер ' + n + ': ' + (s === 'free' ? 'свободен' : s === 'reserved' ? 'бронь' : 'оплачен') + (t && t.name ? ', ' + t.name : ''));
+      var tag = document.createElement('span'); tag.className = 'tag';
+      var inn = document.createElement('span'); inn.className = 'in';
+      var nn = document.createElement('span'); nn.className = 'n'; nn.textContent = n;
+      var who = document.createElement('span'); who.className = 'who';
+      who.textContent = s === 'free' ? '' : (t && t.name ? t.name : 'занят');
+      inn.appendChild(nn); inn.appendChild(who); tag.appendChild(inn); b.appendChild(tag);
+      grid.appendChild(b);
+    }
+    if (!shown) {
+      var e = document.createElement('p'); e.className = 'empty';
+      e.textContent = 'Ничего не найдено. Сбрось фильтр или поменяй запрос.';
+      grid.appendChild(e);
+    }
+    animate = false;
+  }
+  function el(tag, cls, text) { var x = document.createElement(tag); if (cls) x.className = cls; if (text) x.textContent = text; return x; }
+  function selectNode(node) {
+    try { var r = document.createRange(); r.selectNodeContents(node); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); } catch (e) {}
+  }
+  function renderPanel() {
+    panel.innerHTML = '';
+    var stub = el('div', 'stub'), body = el('div', 'body');
+    panel.appendChild(stub); panel.appendChild(body);
+    if (!selected) {
+      stub.appendChild(el('div', 'panel-num', '№'));
+      stub.appendChild(el('div', 'panel-of', 'из 100'));
+      body.appendChild(el('p', '', 'Нажми на номер в таблице, чтобы забрать его или посмотреть, чей он.'));
+      return;
+    }
+    var n = selected, s = status(n), t = TAKEN[n];
+    stub.appendChild(el('div', 'panel-num', String(n)));
+    stub.appendChild(el('div', 'panel-of', 'из 100'));
+    if (s === 'free') {
+      body.appendChild(el('p', '', 'Номер свободен. Скопируй сообщение и отправь мне в Telegram.'));
+      var text = 'Хочу номер ' + n;
+      var row = el('div', 'msg');
+      var code = el('code', '', text);
+      var copy = el('button', 'btn ghost', 'Скопировать'); copy.type = 'button';
+      copy.addEventListener('click', function () {
+        var done = function () { copy.textContent = 'Скопировано'; setTimeout(function () { copy.textContent = 'Скопировать'; }, 1600); };
+        try { navigator.clipboard.writeText(text).then(done, function () { selectNode(code); }); } catch (err) { selectNode(code); }
+      });
+      var link = el('a', 'btn', 'Telegram @' + CONTACT);
+      link.target = '_blank'; link.rel = 'noopener'; link.href = 'https://t.me/' + CONTACT;
+      row.appendChild(code); row.appendChild(copy); row.appendChild(link);
+      body.appendChild(row);
+    } else if (s === 'reserved') {
+      body.appendChild(el('p', '', (t && t.name ? t.name + ' держит этот номер' : 'Номер в брони') + ', жду оплату. Если оплаты не будет, номер снова станет свободным.'));
+    } else {
+      body.appendChild(el('p', '', 'Номер оплачен' + (t && t.name ? ': ' + t.name + '.' : '.') + ' Он уже закреплён.'));
+    }
+  }
+  grid.addEventListener('click', function (e) {
+    var c = e.target.closest('.cell');
+    if (!c) return;
+    selected = Number(c.getAttribute('data-n'));
+    renderGrid(); renderPanel();
+    try { panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (err) {}
+  });
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      filter = b.getAttribute('data-f');
+      document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      renderGrid();
+    });
+  });
+  q.addEventListener('input', renderGrid);
+  renderCount(); renderGrid(); renderPanel();
+  function parseList(text) {
+    var out = {};
+    text.split(/\r?\n/).forEach(function (line) {
+      line = line.trim();
+      if (!line || line.charAt(0) === '#') return;
+      var m = line.match(/^(\d{1,3})\s+(\S+)\s*(.*)$/);
+      if (!m) return;
+      var n = Number(m[1]); if (n < 1 || n > 100) return;
+      var w = m[2].toLowerCase(), st = null;
+      if (w.indexOf('оплач') === 0 || w === 'paid') st = 'paid';
+      else if (w.indexOf('брон') === 0 || w === 'reserved') st = 'reserved';
+      if (!st) return;
+      var rec = { status: st };
+      if (m[3]) rec.name = m[3].trim();
+      out[n] = rec;
+    });
+    return out;
+  }
+  try {
+    fetch('nomera.txt?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (t) {
+        if (t === null) return;
+        TAKEN = parseList(t);
+        renderCount(); renderGrid(); renderPanel();
+      })
+      .catch(function () {});
+  } catch (e) {}
+})();
+</script>
+
+</html>
