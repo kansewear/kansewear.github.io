@@ -232,10 +232,14 @@ h1 em { background: none; -webkit-background-clip: initial; background-clip: ini
 /* v3: bugfix, photos, faq, contacts */
 .me-photo { position: relative; overflow: hidden; }
 .me-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .shots[hidden] { display: none; }
-.shots figure { margin: 0; aspect-ratio: 4/5; overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
-.shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shots figure { margin: 0; position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
+.shots img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+.shots figure:hover img { transform: scale(1.03); }
+.shots figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 12px 10px; font-size: 10px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--fg); background: linear-gradient(0deg, rgba(13,12,11,.8), rgba(13,12,11,0)); }
+@media (min-width: 640px) { .shots { grid-template-columns: repeat(3, minmax(0, 1fr)); } .shots figure:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; } .shots figure:first-child figcaption { font-size: 11px; padding: 40px 18px 14px; } }
+@media (prefers-reduced-motion: reduce) { .shots img { transition: none; } .shots figure:hover img { transform: none; } }
 .faq { display: flex; flex-direction: column; gap: 0; }
 .faq .lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; display: block; }
 .faq details { border-top: 1px solid var(--line); }
@@ -272,6 +276,15 @@ h1 em { background: none; -webkit-background-clip: initial; background-clip: ini
     <div class="seal" aria-hidden="true">№</div>
   </header>
 
+  <section class="shots" id="shots" hidden aria-label="Фото вещи">
+    <figure><img src="foto-1.jpg" alt="Олимпийка Kanse, вид спереди" width="1000" height="1333"><figcaption>Олимпийка</figcaption></figure>
+    <figure><img src="foto-2.jpg" alt="Воротник-стойка и бирка Kanse" width="1000" height="1333" loading="lazy"><figcaption>Воротник-стойка</figcaption></figure>
+    <figure><img src="foto-3.jpg" alt="Две бордовые полоски на рукаве" width="1000" height="1333" loading="lazy"><figcaption>Две полоски на рукаве</figcaption></figure>
+    <figure><img src="foto-4.jpg" alt="Лого Kanse тон-в-тон" width="1000" height="1333" loading="lazy"><figcaption>Лого тон-в-тон</figcaption></figure>
+    <figure><img src="foto-5.jpg" alt="Металлическая молния с гравировкой" width="1000" height="1333" loading="lazy"><figcaption>Молния с гравировкой</figcaption></figure>
+    <figure><img src="foto-6.jpg" alt="Упаковка: карточка и сургуч" width="1000" height="1333" loading="lazy"><figcaption>Карточка и сургуч</figcaption></figure>
+  </section>
+
   <section class="video">
     <a class="vcard" href="https://youtu.be/25qBRqDoENI" target="_blank" rel="noopener">
       <span class="vthumb"><img src="vlog-thumb.jpg?v=2" alt="" loading="lazy" onerror="this.remove()"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l16 9-16 9z"/></svg></span></span>
@@ -287,12 +300,6 @@ h1 em { background: none; -webkit-background-clip: initial; background-clip: ini
   <section class="me">
     <div class="me-photo" id="mePhoto" aria-hidden="true">К<img src="kirill.jpg" alt="" onerror="this.remove()"></div>
     <p>Я Кирилл, из Барнаула. Шесть лет торговал чужой одеждой, теперь делаю свою. Карточку к каждой вещи подпишу сам.</p>
-  </section>
-
-  <section class="shots" id="shots" hidden aria-label="Фото вещи">
-    <figure><img src="foto-1.jpg" alt="Олимпийка Kanse"></figure>
-    <figure><img src="foto-2.jpg" alt="Олимпийка Kanse, деталь"></figure>
-    <figure><img src="foto-3.jpg" alt="Олимпийка Kanse, на модели"></figure>
   </section>
 
   <section class="count" aria-live="polite">
